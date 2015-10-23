@@ -1,5 +1,4 @@
-This README file contains information on building the meta-meta-chip
-BSP layer, and booting the images contained in the /binary directory.
+This README file contains information on building the meta-chip BSP layer.
 Please see the corresponding sections below for details.
 
 
@@ -15,104 +14,49 @@ This layer depends on:
   layers: meta
   branch: master
 
-  URI: git://git.yoctoproject.org/xxxx
-  layers: xxxx
-  branch: master
-
 
 Patches
 =======
 
 Please submit any patches against this BSP to the Yocto mailing list
-(yocto@yoctoproject.org) and cc: the maintainer:
+(yocto@yoctoproject.org), but always prepend your email subject with
+"[meta-chip]" and cc: the maintainer:
 
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
+Maintainer: Andrei Gherzan <andrei@gherzan.ro>
 
-Please see the meta-xxxx/MAINTAINERS file for more details.
+Please see the meta-chip/MAINTAINERS file for more details.
+
+The patches should be compliant with the openembedded patch guidelines:
+http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+
+When creating patches, please use something like:
+
+    git format-patch -s --subject-prefix='meta-chip][PATCH' origin
+
+When sending patches to mailing list, please use something like:
+
+    git send-email --to yocto@yoctoproject.org <generated patch>
 
 
 Table of Contents
 =================
 
-  I. Building the meta-meta-chip BSP layer
- II. Booting the images in /binary
+  I. Building the meta-chip BSP layer
+ II. Flashing a C.H.I.P. board
 
 
-I. Building the meta-meta-chip BSP layer
+I. Building the meta-chip BSP layer
 ========================================
 
---- replace with specific instructions for your layer ---
+To build a machine supported by this BSP layer follow the next steps:
 
-In order to build an image with BSP support for a given release, you
-need to download the corresponding BSP tarball from the 'Board Support
-Package (BSP) Downloads' page of the Yocto Project website.
+1. source poky/oe-init-build-env chip-build
+2. Add needed layer to bblayers.conf:
+    - meta-chip
+3  Set MACHINE to "chip" in local.conf
+4. bitbake core-image-minimal
 
-Having done that, and assuming you extracted the BSP tarball contents
-at the top-level of your yocto build tree, you can build a
-meta-chip image by adding the location of the meta-meta-chip
-layer to bblayers.conf, along with any other layers needed (to access
-common metadata shared between BSPs) e.g.:
+II. Flashing a C.H.I.P. board
+========================================
 
-  yocto/meta-xxxx \
-  yocto/meta-xxxx/meta-meta-chip \
-
-To enable the meta-chip layer, add the meta-chip MACHINE to local.conf:
-
-  MACHINE ?= "meta-chip"
-
-You should then be able to build a meta-chip image as such:
-
-  $ source oe-init-build-env
-  $ bitbake core-image-sato
-
-At the end of a successful build, you should have a live image that
-you can boot from a USB flash drive (see instructions on how to do
-that below, in the section 'Booting the images from /binary').
-
-As an alternative to downloading the BSP tarball, you can also work
-directly from the meta-xxxx git repository.  For each BSP in the
-'meta-xxxx' repository, there are multiple branches, one corresponding
-to each major release starting with 'laverne' (0.90), in addition to
-the latest code which tracks the current master (note that not all
-BSPs are present in every release).  Instead of extracting a BSP
-tarball at the top level of your yocto build tree, you can
-equivalently check out the appropriate branch from the meta-xxxx
-repository at the same location.
-
-
-II. Booting the images in /binary
-=================================
-
---- replace with specific instructions for your platform ---
-
-This BSP contains bootable live images, which can be used to directly
-boot Yocto off of a USB flash drive.
-
-Under Linux, insert a USB flash drive.  Assuming the USB flash drive
-takes device /dev/sdf, use dd to copy the live image to it.  For
-example:
-
-# dd if=core-image-sato-meta-chip-20101207053738.hddimg of=/dev/sdf
-# sync
-# eject /dev/sdf
-
-This should give you a bootable USB flash device.  Insert the device
-into a bootable USB socket on the target, and power on.  This should
-result in a system booted to the Sato graphical desktop.
-
-If you want a terminal, use the arrows at the top of the UI to move to
-different pages of available applications, one of which is named
-'Terminal'.  Clicking that should give you a root terminal.
-
-If you want to ssh into the system, you can use the root terminal to
-ifconfig the IP address and use that to ssh in.  The root password is
-empty, so to log in type 'root' for the user name and hit 'Enter' at
-the Password prompt: and you should be in.
-
-----
-
-If you find you're getting corrupt images on the USB (it doesn't show
-the syslinux boot: prompt, or the boot: prompt contains strange
-characters), try doing this first:
-
-# dd if=/dev/zero of=/dev/sdf bs=1M count=512
+<TODO>
