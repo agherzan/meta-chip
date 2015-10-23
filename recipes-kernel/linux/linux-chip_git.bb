@@ -18,3 +18,20 @@ SRC_URI += " \
     file://defconfig \
     "
 S = "${WORKDIR}/git"
+
+# Automatically depend on lzop-native if CONFIG_KERNEL_LZO is enabled
+python () {
+    try:
+        defconfig = bb.fetch2.localpath('file://defconfig', d)
+    except bb.fetch2.FetchError:
+        return
+
+    try:
+        configfile = open(defconfig)
+    except IOError:
+        return
+
+    if 'CONFIG_KERNEL_LZO=y\n' in configfile.readlines():
+        depends = d.getVar('DEPENDS', False)
+        d.setVar('DEPENDS', depends + ' lzop-native')
+}
