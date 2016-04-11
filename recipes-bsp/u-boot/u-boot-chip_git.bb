@@ -2,6 +2,8 @@ require recipes-bsp/u-boot/u-boot.inc
 
 DESCRIPTION = "U-Boot port for C.H.I.P. boards"
 
+LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
+
 DEPENDS += "dtc-native"
 PROVIDES += "u-boot"
 
