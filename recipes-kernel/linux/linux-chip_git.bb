@@ -69,4 +69,6 @@ python () {
     if 'CONFIG_KERNEL_LZO=y\n' in configfile.readlines():
         depends = d.getVar('DEPENDS', False)
         d.setVar('DEPENDS', depends + ' lzop-native')
+
+    configfile.close()
 }
