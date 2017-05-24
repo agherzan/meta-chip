@@ -1,7 +1,7 @@
 require recipes-bsp/u-boot/u-boot.inc
 
 DESCRIPTION = "U-Boot port for C.H.I.P. boards"
-
+LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
 
 DEPENDS += "dtc-native"
@@ -20,4 +20,3 @@ do_compile_append() {
 }
 
 COMPATIBLE_MACHINE = "chip"
-
