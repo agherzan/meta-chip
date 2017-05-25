@@ -7,12 +7,15 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
 DEPENDS += "dtc-native"
 PROVIDES += "u-boot"
 
-UBOOT_VERSION ?= "2015.07"
+UBOOT_VERSION ?= "2016.01"
 PV = "${UBOOT_VERSION}+git${SRCPV}"
 
-SRCREV ?= "854d5fcc641d8d8914c03a69d7172815d5b81a99"
-BRANCH ?= "chip/stable"
-SRC_URI = "git://github.com/NextThingCo/CHIP-u-boot.git;branch=${BRANCH}"
+SRCREV ?= "c23364e2cd21ef74f7405fa03e537582f062c4c0"
+BRANCH ?= "nextthing/2016.01/chip"
+SRC_URI = " \
+	git://github.com/NextThingCo/CHIP-u-boot.git;branch=${BRANCH} \
+	file://gcc6.patch \
+	"
 S = "${WORKDIR}/git"
 
 do_compile_append() {
