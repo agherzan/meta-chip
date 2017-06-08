@@ -14,6 +14,9 @@ This layer depends on:
   layers: meta
   branch: master
 
+  URI: git://github.com/linux-sunxi/meta-sunxi.git
+  branch: master
+
 
 Patches
 =======
