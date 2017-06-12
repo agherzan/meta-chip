@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
 
 DEPENDS += "dtc-native"
 PROVIDES += "u-boot"
+RDEPENDS_${PN}_append_chip = " chip-u-boot-scr"
 
 UBOOT_VERSION ?= "2016.01"
 PV = "${UBOOT_VERSION}+git${SRCPV}"

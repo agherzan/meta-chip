@@ -62,4 +62,93 @@ To build a machine supported by this BSP layer follow the next steps:
 II. Flashing a C.H.I.P. board
 ========================================
 
-<TODO>
+As part of the build including this BSP layer, a U-Boot script and a
+shell script are created to assist in flashing your images to the CHIP
+board. Note that this script assumes a maximum size for your UBI
+image of 167772160 (0x0A000000) bytes. If your UBI image exceeds
+that, then you will need to adapt this to your environment.
+
+To successfully run this script you will first need to set your board
+into FEL mode. Insert a wire into the U14 header between pin 7 (FEL)
+and GND. Then connect the board with a USB cable to your host. More
+details here:
+    https://docs.getchip.com/chip.html#flash-chip-with-an-os
+
+You need to specify the base filename of your UBI image using the
+UBI_IMAGE shell variable before invoking the generated script as
+follows:
+
+# UBI_IMAGE=chip-hwup-image-chip.ubi \
+        ./tmp/deploy/images/chip/flash_CHIP_board.sh
+
+This script will take some time to execute. The output of this script
+as run on your host machine should look similar to the following:
+
+    # UBI_IMAGE=chip-hwup-image-chip.ubi ./tmp/deploy/images/chip/flash_CHIP_board.sh
+    100% [================================================]  3537 kB,  513.9 kB/s
+    100% [================================================]   619 kB,  551.1 kB/s
+    100% [================================================]     2 kB,  476.0 kB/s
+    100% [================================================] 71303 kB,  531.1 kB/s
+
+If you have a serial console connected to your board, you will see
+progress and a message on the console indicating when flashing is
+complete:
+
+    U-Boot 2016.01 (Jun 20 2017 - 02:54:42 -0400) Allwinner Technology
+    
+    CPU:   Allwinner A13 (SUN5I)
+    I2C:   ready
+    DRAM:  512 MiB
+    NAND:  8192 MiB
+    video-mode 720x480-24@60 not available, falling back to 1024x768-24@60
+    Setting up a 720x480i composite-ntsc console (overscan 40x20)
+    In:    serial
+    Out:   serial
+    Err:   serial
+    Net:   usb_ether
+    starting USB...
+    No controllers found
+    Hit any key to stop autoboot:  0
+    (FEL boot)
+    ## Executing script at 43100000
+    Erasing NAND
+    
+    NAND erase.chip: device 0 whole chip
+    Skipping bad block at  0xeb000000
+    Skipping bad block at  0x1b1000000
+    Erasing at 0x1ffc00000 -- 100% complete.
+    OK
+    Writing SPL (with ECC) to NAND address 0x00000000
+    
+    NAND write:  3537408 bytes written: OK
+    Writing SPL (with ECC) to NAND address 0x400000
+    
+    NAND write:  3537408 bytes written: OK
+    Writing UBoot image to address 0x800000
+    
+    NAND write: device 0 offset 0x800000, size 0x97236
+     619062 bytes written: OK
+    Enabling Splash
+    Setting Video Mode
+    Saving default environment
+    Saving Environment to NAND...
+    Erasing NAND...
+    Erasing at 0xc00000 -- 100% complete.
+    Writing to NAND... OK
+    Writing UBI rootfs to NAND address 0x1000000
+    
+    NAND write: device 0 offset 0x1000000, size 0xa000000
+     167772160 bytes written: OK
+    ===========================================================
+    Flashing Complete. Please power down and disable FEL mode.
+    ===========================================================
+
+Additionally, once the image is properly flashed, the status LED on
+the CHIP board will flash on and off every 2 seconds. This indicates
+that it is safe to power down your board and disable FEL mode.
+
+WARNING: This will erase the entire contents of your CHIP board.
+
+NOTE: This setup is still compatible with the CHIP flashing utility
+available at http://flash.getchip.com if you choose to reinstall the
+stock images.
