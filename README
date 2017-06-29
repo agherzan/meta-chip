@@ -18,27 +18,35 @@ This layer depends on:
   branch: master
 
 
-Patches
-=======
+Contributing
+============
 
-Please submit any patches against this BSP to the Yocto mailing list
-(yocto@yoctoproject.org), but always prepend your email subject with
-"[meta-chip]" and cc: the maintainer:
+Mailing list
+The main communication tool we use is a mailing list:
+* <yocto@yoctoproject.org>
+* <https://lists.yoctoproject.org/listinfo/yocto>
+Feel free to ask any kind of questions but always prepend your email subject
+with "[meta-chip]". This is because we use the 'yocto' mailing list and
+not a particular 'meta-chip' mailing list.
 
-Maintainer: Andrei Gherzan <andrei@gherzan.ro>
+Patches and pull requests
+All the contributions should be compliant with the openembedded patch
+guidelines: <http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines>
+To contribute to this project you should send pull requests to the github
+repository (<https://github.com/agherzan/meta-chip>). **Additionally** you can
+send the patches for review to the above specified mailing list so that
+more people can see and review your contributions..
+When creating patches for the mailing list, please use something like:
 
-Please see the meta-chip/MAINTAINERS file for more details.
+	git format-patch -s --subject-prefix='meta-chip][PATCH' origin
 
-The patches should be compliant with the openembedded patch guidelines:
-http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+When sending patches to the mailing list, please use something like:
 
-When creating patches, please use something like:
+	git send-email --to yocto@yoctoproject.org <generated patch>
 
-    git format-patch -s --subject-prefix='meta-chip][PATCH' origin
-
-When sending patches to mailing list, please use something like:
-
-    git send-email --to yocto@yoctoproject.org <generated patch>
+Github issues
+In order to manage and trace the meta-chip issues, we use github issues:
+<https://github.com/agherzan/meta-chip/issues>
 
 
 Table of Contents
