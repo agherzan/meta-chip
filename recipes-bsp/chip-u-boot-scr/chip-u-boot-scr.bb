@@ -19,7 +19,8 @@ UBI_MEMIMG_ADDR = "0x4b000000"
 UBI_FLASH_ADDR = "0x1000000"
 OOB_SIZE = "1664"
 SCRIPTADDR = "0x43100000"
-UBI_SIZE="0x0A000000"
+# max supported image size
+UBI_SIZE ?= "0x0F000000"
 
 do_compile[depends] += "u-boot-chip:do_deploy"
 do_compile() {
