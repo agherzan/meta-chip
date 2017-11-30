@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 COMPATIBLE_MACHINE = "chip"
 
 inherit kernel
-require recipes-kernel/linux/linux-dtb.inc
 
 LINUX_VERSION ?= "4.3.0"
 PV = "${LINUX_VERSION}+git${SRCPV}"
