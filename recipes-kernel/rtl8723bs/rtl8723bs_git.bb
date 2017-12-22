@@ -18,12 +18,5 @@ EXTRA_OEMAKE = "KSRC=${STAGING_KERNEL_DIR} \
                 ARCH=${ARCH} \
                 MODDESTDIR=${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless/ \
                "
-
-do_install_append() {
-	install -d ${D}/lib/firmware/rtlwifi
-        install -m0644 ${S}/*.bin ${D}/lib/firmware/rtlwifi
-}
-
 PKGV = "${KERNEL_VERSION}"
 
-FILES_${PN} += "/lib/firmware"
